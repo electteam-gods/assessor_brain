@@ -1,7 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from uuid import uuid4
 from pydantic import BaseModel
-import boto3
 import requests
 import json
 import io
