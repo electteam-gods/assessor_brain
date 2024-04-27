@@ -28,7 +28,7 @@ async def Quetion_generation(input: TextInput):
         response = requests.get(url)
         r = response.json()
         if response.status_code == 200:
-            data = np.array(json.loads(r))
+            data = np.array(r)
         else:
             HTTPException(status_code=404, detail="Failed to download file")
     except Exception as e:
