@@ -14,8 +14,8 @@ sys.path.append('')
 
 app = FastAPI()
 raw_model = 'cointegrated/rut5-base-multitask'
-seqsearch = SeqSearch('search.pth', raw_model)
-quesgen = Quesgen('firstmodel.pth', raw_model)
+seqsearch = SeqSearch('weights/search.pth', raw_model)
+quesgen = Quesgen('weights/firstmodel.pth', raw_model)
 
 class TextInput(BaseModel):
     url: str
