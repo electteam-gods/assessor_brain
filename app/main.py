@@ -22,7 +22,7 @@ class TextInput(BaseModel):
 
 
 @app.post("/")
-async def Quetion_generation(input: TextInput):
+async def Quetion_generation(count: int, input: TextInput):
     url = input.url
     try:
         response = requests.get(url)
@@ -33,7 +33,7 @@ async def Quetion_generation(input: TextInput):
             HTTPException(status_code=404, detail="Failed to download file")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    choice = list(np.random.choice(len(data), 5, replace=False))
+    choice = list(np.random.choice(len(data), count, replace=False))
     data = data[choice]
     res = dict({'questions': []})
     for par in data:
