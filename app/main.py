@@ -36,13 +36,13 @@ async def Quetion_generation(input: TextInput):
     choice = list(np.random.choice(len(data), 5, replace=False))
     data = data[choice]
     res = dict({'questions': []})
-    for paragraph in data:
-        paragraph = ' '.join(paragraph['content'])
+    for par in data:
+        paragraph = ' '.join(par['content'])
         context = seqsearch.generate(paragraph, max_length=200)
         question = quesgen.generate("", context, max_length=128)
         res['questions'].append({
             'question': question,
-            'title': paragraph['title']
+            'title': par['title']
         })
 
     return res
