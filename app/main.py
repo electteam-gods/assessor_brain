@@ -26,11 +26,11 @@ async def Quetion_generation(input: TextInput):
     url = input.url
     try:
         response = requests.get(url)
+        r = response.json()
         if response.status_code == 200:
-            with open(response.content, 'r') as file:
-                data = np.array(json.load(file))
+            data = np.array(json.loads(r))
         else:
-            HTTPException(status_code=404, detail="Failed to download image")
+            HTTPException(status_code=404, detail="Failed to download file")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     choice = list(np.random.choice(len(data), 5, replace=False))
