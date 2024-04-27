@@ -40,7 +40,7 @@ async def Quetion_generation(input: TextInput):
         paragraph = ' '.join(paragraph['content'])
         context = seqsearch.generate(paragraph, max_length=200)
         question = quesgen.generate("", context, max_length=128)
-        res['question'].append({
+        res['questions'].append({
             'question': question,
             'title': paragraph['title']
         })
