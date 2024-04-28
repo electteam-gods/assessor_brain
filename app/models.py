@@ -5,6 +5,8 @@ from transformers import (
 from transformers import pipeline
 import torch
 
+from typing import Any
+
 
 class Quesgen:
 
@@ -34,6 +36,7 @@ class SeqSearch:
 
 
 class QuesAns:
+    pipe: Any
 
     def init(self):
         self.pipe = pipeline("question-answering", model="timpal0l/mdeberta-v3-base-squad2")
