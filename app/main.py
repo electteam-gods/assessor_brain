@@ -25,7 +25,7 @@ class TextInput(BaseModel):
 
 
 @app.post("/")
-async def Quetion_generation(tem: str|None, count: int, input: TextInput):
+async def Quetion_generation(count: int, input: TextInput, tem: str|None=None):
     url = input.url
     try:
         response = requests.get(url)
