@@ -56,8 +56,19 @@ async def Quetion_generation(count: int, input: TextInput, tem: str|None=None):
 
     return res
 
+
+class AnswerDescritor(BaseModel):
+    question: str
+    context: str
+    answer: str
+
+
+class CheckInput(BaseModel):
+    url: str
+    questions: list[AnswerDescritor]
+
 @app.post("/check")
-async def Quetion_check(input: TextInput):
+async def Quetion_check(input: CheckInput):
     url = input.url
     try:
         response = requests.get(url)
@@ -69,9 +80,9 @@ async def Quetion_check(input: TextInput):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     res = dict({'questions': []})
-    for par in data:
-        answerm = quesans.generate(par['question'], par['context'])
-        answeru = par['answer']
+    for par in input.questions:
+        answerm = quesans.generate(par.question, par.context)
+        answeru = par.answer
         documents = [answerm, answeru]
         vectorizer = TfidfVectorizer()
         matrix = vectorizer.fit_transform(documents)
