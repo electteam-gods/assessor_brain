@@ -69,7 +69,7 @@ async def Quetion_check(input: TextInput):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     res = dict({'questions': []})
-    for par in res:
+    for par in data:
         answerm = quesans.generate(par['question'], par['context'])
         answeru = par['answer']
         documents = [answerm, answeru]
