@@ -38,7 +38,7 @@ class SeqSearch:
 class QuesAns:
     pipe: Any
 
-    def init(self):
+    def __init__(self):
         self.pipe = pipeline("question-answering", model="timpal0l/mdeberta-v3-base-squad2")
 
     def generate(self, question, context):
