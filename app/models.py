@@ -2,6 +2,7 @@ from transformers import (
     T5ForConditionalGeneration,
     T5Tokenizer,
 )
+from transformers import pipeline
 import torch
 
 
@@ -30,3 +31,12 @@ class SeqSearch:
         res = self.model.generate(input_ids, **generator_args)
         output = self.tokenizer.decode(res[0], skip_special_tokens=True)
         return output
+
+
+class QuesAns:
+
+    def init(self):
+        self.pipe = pipeline("question-answering", model="timpal0l/mdeberta-v3-base-squad2")
+
+    def generate(self, question, context):
+        return self.pipe(question=question, context=context)['answer']
